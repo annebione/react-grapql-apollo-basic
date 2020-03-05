@@ -116,15 +116,12 @@ class DetailPage extends Component {
         }}
       </Mutation>
     )
-    if (!published) {
-      return (
-        <Fragment>
-          {publishMutation}
-          {deleteMutation}
-        </Fragment>
-      )
-    }
-    return deleteMutation
+    return (
+      <Fragment>
+        {publishMutation}
+        {deleteMutation}
+      </Fragment>
+    )
   }
 
 }
