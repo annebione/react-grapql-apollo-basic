@@ -13,6 +13,7 @@ import ApolloClient from 'apollo-boost'
 import CasesPage from './components/CasesPage'
 import ContactsPage from './components/ContactsPage'
 import CreateContact from './components/CreateContact'
+import CreateCase from './components/CreateCase'
 import DetailPage from './components/DetailPage'
 
 import 'tachyons'
@@ -51,18 +52,25 @@ ReactDOM.render(
             Contacts
           </NavLink>
           <Link
-            to="/create"
+            to="/contact/create"
             className="f6 link dim br1 ba ph3 pv2 fr mb2 dib black"
           >
             + Create Contact
+          </Link>
+          <Link
+            to="/case/create"
+            className="f6 link dim br1 ba ph3 pv2 fr mb2 dib black"
+          >
+            + Create Case
           </Link>
         </nav>
         <div className="fl w-100 pl4 pr4">
           <Switch>
             <Route exact path="/" component={CasesPage} />
             <Route path="/contacts" component={ContactsPage} />
-            <Route path="/create" component={CreateContact} />
-            <Route path="/case/:id" component={DetailPage} />
+            <Route path="/contacts/create" component={CreateContact} />
+            <Route path="/cases/create" component={CreateCase} />
+            <Route path="/cases/:id" component={DetailPage} />
           </Switch>
         </div>
       </Fragment>

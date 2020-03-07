@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import Post from './Post'
+import Contact from './Contact'
 import { Query } from 'react-apollo'
 import  { gql } from 'apollo-boost'
 
@@ -30,7 +30,7 @@ export default class ContactsPage extends Component {
               </div>
               {data.contacts &&
                 data.contacts.map(contact => (
-                  <Post
+                  <Contact
                     key={contact.id}
                     post={contact}
                     refresh={() => refetch()}

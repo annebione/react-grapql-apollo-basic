@@ -3,7 +3,6 @@ import { Query, Mutation } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import  { gql } from 'apollo-boost'
 import { CONTACTS_QUERY } from './ContactsPage'
-import { CASES_QUERY } from './CasesPage'
 
 class DetailPage extends Component {
   render() {
@@ -41,55 +40,11 @@ class DetailPage extends Component {
   }
 
   _renderAction = ({ id, published }) => {
-    const publishMutation = (
-      <Mutation
-        mutation={PUBLISH_MUTATION}
-        update={(cache, { data }) => {
-          const { contacts } = cache.readQuery({ query: CONTACTS_QUERY })
-          const { cases } = cache.readQuery({ query: CASES_QUERY })
-          cache.writeQuery({
-            query: CASES_QUERY,
-            data: { cases: cases.concat([data.publish]) },
-          })
-          cache.writeQuery({
-            query: CONTACTS_QUERY,
-            data: {
-              contacts: contacts.filter(contact => contact.id !== data.publish.id),
-            },
-          })
-        }}
-      >
-        {(publish, { data, loading, error }) => {
-          return (
-            <a
-              className="f6 dim br1 ba ph3 pv2 mb2 dib black pointer"
-              onClick={async () => {
-                await publish({
-                  variables: { id },
-                })
-                this.props.history.replace('/')
-              }}
-            >
-              Publish
-            </a>
-          )
-        }}
-      </Mutation>
-    )
     const deleteMutation = (
       <Mutation
         mutation={DELETE_MUTATION}
         update={(cache, { data }) => {
-          if (published) {
-            const { contacts } = cache.readQuery({ query: CASES_QUERY })
-            cache.writeQuery({
-              query: CASES_QUERY,
-              data: {
-                cases: cases.filter(singleCase => singleCase.id !== data.deletePost.id),
-              },
-            })
-          } else {
-            const { drafts } = cache.readQuery({ query: CONTACTS_QUERY })
+            const { contacts } = cache.readQuery({ query: CONTACTS_QUERY })
             cache.writeQuery({
               query: CONTACTS_QUERY,
               data: {
@@ -97,7 +52,7 @@ class DetailPage extends Component {
               },
             })
           }
-        }}
+        }
       >
         {(deletePost, { data, loading, error }) => {
           return (
@@ -116,15 +71,11 @@ class DetailPage extends Component {
         }}
       </Mutation>
     )
-    if (!published) {
-      return (
-        <Fragment>
-          {publishMutation}
-          {deleteMutation}
-        </Fragment>
-      )
-    }
-    return deleteMutation
+    return (
+      <Fragment>
+        {deleteMutation}
+      </Fragment>
+    )
   }
 
 }
