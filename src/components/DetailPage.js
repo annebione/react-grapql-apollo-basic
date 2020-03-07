@@ -91,15 +91,6 @@ const POST_QUERY = gql`
   }
 `
 
-const PUBLISH_MUTATION = gql`
-  mutation PublishMutation($id: ID!) {
-    publish(id: $id) {
-      id
-      published
-    }
-  }
-`
-
 const DELETE_MUTATION = gql`
   mutation DeleteMutation($id: ID!) {
     deletePost(id: $id) {

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import Post from './Post'
+import Case from './Case'
 import { Query } from 'react-apollo'
 import  { gql } from 'apollo-boost'
 
@@ -29,7 +29,7 @@ export default class CasesPage extends Component {
               <h1>?Case List</h1>
               {data.cases &&
                 data.cases.map(singleCase => (
-                  <Post
+                  <Case
                     key={singleCase.id}
                     post={singleCase}
                     refresh={() => refetch()}
