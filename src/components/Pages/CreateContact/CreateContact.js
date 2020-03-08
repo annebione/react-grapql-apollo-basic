@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import  { gql } from 'apollo-boost'
-import { CONTACTS_QUERY } from './ContactsPage'
+import { CONTACTS_QUERY } from '../Contacts/ContactsPage'
 
 class CreateContact extends Component {
   state = {
@@ -15,7 +15,6 @@ class CreateContact extends Component {
 
   render() {
     return (
-      // UP NEXT START
       <Mutation
         mutation={CREATE_CONTACT_MUTATION}
         update={(cache, { data }) => {
@@ -45,7 +44,7 @@ class CreateContact extends Component {
                       assignedCase,
                       caseRole },
                   })
-                  this.props.history.replace('/contacts')
+                  this.props.history.replace('/')
                 }}
               >
                 <h1>Create Contact</h1>

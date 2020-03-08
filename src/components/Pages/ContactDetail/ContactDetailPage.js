@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import  { gql } from 'apollo-boost'
-import { CONTACTS_QUERY } from './ContactsPage'
+import { CONTACTS_QUERY } from '../Contacts/ContactsPage'
+import { Link } from 'react-router-dom'
 
 class ContactDetailPage extends Component {
   render() {

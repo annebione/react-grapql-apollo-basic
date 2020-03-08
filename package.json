@@ -5,6 +5,7 @@
     "react-scripts": "2.1.8"
   },
   "dependencies": {
+    "@apollo/client": "^3.0.0-beta.39",
     "apollo-boost": "0.4.7",
     "graphql": "14.0.2",
     "react": "16.13.0",

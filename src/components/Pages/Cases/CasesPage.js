@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import Case from './Case'
+import Case from '../../Case/Case'
 import { Query } from 'react-apollo'
 import  { gql } from 'apollo-boost'
 

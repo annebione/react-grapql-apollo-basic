@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import Contact from './Contact'
+import Contact from '../../Contact/Contact'
 import { Query } from 'react-apollo'
 import  { gql } from 'apollo-boost'
 

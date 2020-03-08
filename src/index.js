@@ -10,11 +10,11 @@ import {
 import { ApolloProvider } from 'react-apollo'
 import ApolloClient from 'apollo-boost'
 
-import CasesPage from './components/CasesPage'
-import ContactsPage from './components/ContactsPage'
-import CreateContact from './components/CreateContact'
-import CreateCase from './components/CreateCase'
-import DetailPage from './components/DetailPage'
+import CasesPage from './components/Pages/Cases/CasesPage'
+import ContactsPage from './components/Pages/Contacts/ContactsPage'
+import CreateContact from './components/Pages/CreateContact/CreateContact'
+import CreateCase from './components/Pages/CreateCase/CreateCase'
+import ContactDetailPage from './components/Pages/ContactDetail/ContactDetailPage'
 
 import 'tachyons'
 import './index.css'
@@ -26,13 +26,6 @@ ReactDOM.render(
     <Router>
       <Fragment>
         <nav className="pa3 pa4-ns">
-          <Link
-            className="link dim black b f6 f5-ns dib mr3"
-            to="/"
-            title="Cases"
-          >
-            Cases
-          </Link>
           <NavLink
             className="link dim f6 f5-ns dib mr3 black"
             activeClassName="gray"
@@ -58,7 +51,7 @@ ReactDOM.render(
             + Create Contact
           </Link>
           <Link
-            to="/case/create"
+            to="/cases/create"
             className="f6 link dim br1 ba ph3 pv2 fr mb2 dib black"
           >
             + Create Case
@@ -68,9 +61,9 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={CasesPage} />
             <Route path="/contacts" component={ContactsPage} />
-            <Route path="/contacts/create" component={CreateContact} />
+            <Route path="/contact/create" component={CreateContact} />
             <Route path="/cases/create" component={CreateCase} />
-            <Route path="/cases/:id" component={DetailPage} />
+            <Route path="/contacts/:id" component={ContactDetailPage} />
           </Switch>
         </div>
       </Fragment>

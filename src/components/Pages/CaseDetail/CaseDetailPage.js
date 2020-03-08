@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
 import  { gql } from 'apollo-boost'
-import { CASES_QUERY } from './CasesPage'
+import { CASES_QUERY } from '../Cases/CasesPage'
+import { Link } from 'react-router-dom'
 
 class CaseDetailPage extends Component {
   render() {
