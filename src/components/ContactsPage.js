@@ -32,7 +32,7 @@ export default class ContactsPage extends Component {
                 data.contacts.map(contact => (
                   <Contact
                     key={contact.id}
-                    post={contact}
+                    contact={contact}
                     refresh={() => refetch()}
                   />
                 ))}

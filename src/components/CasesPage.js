@@ -31,7 +31,7 @@ export default class CasesPage extends Component {
                 data.cases.map(singleCase => (
                   <Case
                     key={singleCase.id}
-                    post={singleCase}
+                    case={singleCase}
                     refresh={() => refetch()}
                   />
                 )) }

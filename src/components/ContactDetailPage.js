@@ -4,10 +4,10 @@ import { withRouter } from 'react-router-dom'
 import  { gql } from 'apollo-boost'
 import { CONTACTS_QUERY } from './ContactsPage'
 
-class DetailPage extends Component {
+class ContactDetailPage extends Component {
   render() {
     return (
-      <Query query={POST_QUERY} variables={{ id: this.props.match.params.id }}>
+      <Query query={ CONTACT_QUERY } variables={{ id: this.props.match.params.id }}>
         {({ data, loading, error }) => {
           if (loading) {
             return (
@@ -25,12 +25,23 @@ class DetailPage extends Component {
             )
           }
 
-          const { post } = data
-          const action = this._renderAction(post)
+          const { contact } = data
+          const action = this._renderAction(contact)
           return (
             <Fragment>
-              <h1 className="f3 black-80 fw4 lh-solid">{data.post.title}</h1>
-              <p className="black-80 fw3">{data.post.content}</p>
+              <h1 className="f3 black-80 fw4 lh-solid">{contact.first_name} {contact.last_name}</h1>
+              <p className="black-80 fw3">{contact.case_role}</p>
+              <p className="black-80 fw3">Contact: {contact.email}</p>
+              { contact.assigned_case.length > 0  ?
+                contact.assigned_case.map(singleCase => ( 
+                  <React.Fragment>
+                    <h5 className="f3 black-80 fw4 lh-solid">Cases:</h5>
+                    <Link className="no-underline ma1" to={`/cases/${singleCase.id}`}>
+                      <p className="black-80 fw3">{singleCase.title} </p>
+                    </Link>
+                  </React.Fragment>
+                ))
+                : null }
               {action}
             </Fragment>
           )
@@ -40,26 +51,26 @@ class DetailPage extends Component {
   }
 
   _renderAction = ({ id, published }) => {
-    const deleteMutation = (
+    const deleteContactMutation = (
       <Mutation
-        mutation={DELETE_MUTATION}
+        mutation={DELETE_CONTACT_MUTATION}
         update={(cache, { data }) => {
             const { contacts } = cache.readQuery({ query: CONTACTS_QUERY })
             cache.writeQuery({
               query: CONTACTS_QUERY,
               data: {
-                contacts: contacts.filter(contacts => contacts.id !== data.deletePost.id),
+                contacts: contacts.filter(contacts => contacts.id !== data.deleteContact.id),
               },
             })
           }
         }
       >
-        {(deletePost, { data, loading, error }) => {
+        {(deleteContact, { data, loading, error }) => {
           return (
             <a
               className="f6 dim br1 ba ph3 pv2 mb2 dib black pointer"
               onClick={async () => {
-                await deletePost({
+                await deleteContact({
                   variables: { id },
                 })
                 this.props.history.replace('/')
@@ -73,30 +84,32 @@ class DetailPage extends Component {
     )
     return (
       <Fragment>
-        {deleteMutation}
+        {deleteContactMutation}
       </Fragment>
     )
   }
 
 }
 
-const POST_QUERY = gql`
-  query PostQuery($id: ID!) {
-    post(id: $id) {
-      id
-      title
-      content
-      published
+const CONTACT_QUERY = gql`
+  query ContactQuery($id: ID!) {
+    contact(id: $id) {
+      id,
+      first_name,
+      last_name,
+      case_role,
+      email,
+      assigned_case
     }
   }
 `
 
-const DELETE_MUTATION = gql`
-  mutation DeleteMutation($id: ID!) {
-    deletePost(id: $id) {
+const DELETE_CONTACT_MUTATION = gql`
+  mutation DeleteContactMutation($id: ID!) {
+    deleteContact(id: $id) {
       id
     }
   }
 `
 
-export default withRouter(DetailPage)
+export default withRouter(ContactDetailPage)
