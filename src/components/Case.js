@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 
 export default class Case extends Component {
   render() {
-    let title = this.props.title;
-    let description = this.props.description;
-    let value = this.props.value;
-    let court_date = this.props.court_date;
-    let contacts = this.props.contacts;
+    let title = this.props.case.title;
+    let description = this.props.case.description;
+    let value = this.props.case.value;
+    let court_date = this.props.case.court_date;
+    let contacts = this.props.case.contacts;
 
     return (
       <React.Fragment>
